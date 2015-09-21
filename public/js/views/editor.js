@@ -1,5 +1,5 @@
 (function () {
-  var template ='<form style="display:none"><input type="file" name="text" /></form>\
+  var template ='<form style="visibility:visible;height:0px"><input type="file" name="text" style="opacity:0" /></form>\
   {{#button "upload"}}Upload{{/button}}\
   <div></div>';
 
@@ -18,12 +18,12 @@
     events: {
       'change input[type="file"]': function(event){
         var fd = new FormData(this.$el.find('form').get(0));
-        if(fd.get('text')) {
+        if(this.$el.find('input[type="file"]').val()) {
           var xhr = new XMLHttpRequest();
           xhr.open('POST', '/annotate');
           xhr.onload = _.bind(function () {
               if (xhr.status === 200) {
-                fd.delete('text');
+                this.$el.find('input[type="file"]').val('');
                 var res = JSON.parse(xhr.responseText);
                 this.$el.find('div').html(render_response(res));
               }
@@ -35,9 +35,8 @@
         }
       }
     },
-    upload: function (ev) {
-      var fd = new FormData(this.$el.find('form').get(0));
-      $(fd).find('input').click();
+    upload: function (event) {
+      this.$el.find('input[type="file"]').click();
     }
   });
 }());
