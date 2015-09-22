@@ -25,7 +25,20 @@
               if (xhr.status === 200) {
                 this.$el.find('input[type="file"]').val('');
                 var res = JSON.parse(xhr.responseText);
-                this.$el.find('div').html(render_response(res));
+                var panel = this.$el.find('div');
+                panel.html(render_response(res));
+                panel.find('span').click(function (event) {
+                  xhr.open('POST', '/words/find');
+                  xhr.onload = _.bind(function () {
+                    if (xhr.status === 200) {
+                      var res = JSON.parse(xhr.responseText);
+                    }
+                    else {
+                      console.log(xhr.responseText);
+                    }
+                  });
+                  xhr.send({text: $(event.target).text()});
+                });
               }
               else{
                 console.log(xhr.responseText);

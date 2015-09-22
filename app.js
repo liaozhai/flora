@@ -11,6 +11,7 @@ var _ = require('underscore');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var words = require('./routes/words');
 var Segment = require('node-segment').Segment;
 
 var app = express();
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/words', words);
 
 app.post('/annotate', upload.single('text'),function(req, res){
   var seg = new Segment();
