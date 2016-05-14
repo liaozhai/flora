@@ -1,0 +1,14 @@
+body {
+}
+
+.main-view-text span:hover {
+  background-color: yellow;
+}
+
+div.modal-body input[type="text"]{
+  width: 100%;
+}
+
+.main-view-items-dialog{
+  display: none;
+}
