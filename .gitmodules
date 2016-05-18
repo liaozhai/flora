@@ -1,0 +1,3 @@
+[submodule "external/bkrs"]
+	path = external/bkrs
+	url = https://github.com/liaozhai/bkrs.git
